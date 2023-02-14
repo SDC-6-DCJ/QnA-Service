@@ -1,3 +1,9 @@
+/*
+  Make sure to create `qna` database first!
+  Run with psql qna -f filePath
+  For Jake - psql qna -f Galvanize/seniorProjects/QnA-Service/pgres.sql
+*/
+
 CREATE TABLE questions (
   question_id SERIAL NOT NULL PRIMARY KEY,
   question_body VARCHAR(300),
