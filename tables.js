@@ -16,7 +16,7 @@ module.exports = {
       type: Sequelize.STRING(300),
     },
     date: {
-      type: Sequelize.DATEONLY,
+      type: Sequelize.STRING(15),
     },
     asker_name: {
       type: Sequelize.STRING(50),
@@ -47,7 +47,7 @@ module.exports = {
       type: Sequelize.STRING(300),
     },
     date: {
-      type: Sequelize.DATEONLY,
+      type: Sequelize.STRING(15),
     },
     anserer_name: {
       type: Sequelize.STRING(50),

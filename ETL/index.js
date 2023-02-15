@@ -5,7 +5,7 @@ const schema = require('../tables.js')
 
 const { Sequelize, Model, DataTypes } = require('sequelize');
 
-const sequelize = new Sequelize('database', 'username', 'password', {
+const sequelize = new Sequelize('qna', 'yandlier', 'unset', {
   host: 'localhost',
   dialect: 'postgres',
 });
@@ -23,7 +23,8 @@ const data = {
 
 const keys = {
   answers: ['id', 'question_id', 'body', 'date', 'answerer_name', 'answerer_email', 'reported', 'helpful'],
-  questions: ['id', 'product_id', 'body', 'date', 'asker_name', 'asker_email', 'reported', 'helpful'],
+  questions: ['id', 'product_id', 'body', 'date', '
+  sker_name', 'asker_email', 'reported', 'helpful'],
   photos: ['id', 'answer_id', 'url'],
 }
 
@@ -34,11 +35,13 @@ const badData = {
   questions: [],
 };
 
-// const saveFunc = (row) => new Promise((res) => setTimeout(() => res(), 50))
+sequelize.sync()
+  .then(() => {
+    load(data.photos, keys.photos, Photos.create.bind(Photos), (err, good) => {
+      if (err) {
+        console.log('ERROR', err)
+        badData.answers1.push(err)
+      }
+    });
+  });
 
-// load(data.answers1, keys.answers, saveFunc, (err, good) => {
-//   if (err) {
-//     console.log('ERROR', err)
-//     badData.answers1.push(err)
-//   }
-// );
