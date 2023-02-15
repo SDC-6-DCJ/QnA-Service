@@ -1,6 +1,6 @@
 const fs = require('fs').promises;
 const path = require('path');
-const parse = require('./parse.js');
+const load = require('./load.js');
 
 const data = {
   photos: path.join(__dirname, '/../src/answers_photos.csv'),
@@ -9,6 +9,10 @@ const data = {
   questions: path.join(__dirname, '/../src/questions.csv'),
 };
 
+const keys = {
+  answers: ['id', 'question_id', 'body', 'date_written', 'answerer_name', 'answerer_email', 'reported', 'helpful'],
+}
+
 const badData = {
   photos: [],
   answers1: [],
@@ -16,6 +20,11 @@ const badData = {
   questions: [],
 };
 
-fs.readFile(data.answers1)
-  .then(results => parse.answers(results))
-  .then(results => console.log(results[0]))
+const saveFunc = (row) => new Promise((res) => setTimeout(() => res(), 50))
+
+load(data.answers1, keys.answers, saveFunc, (err, good) => {
+  if (err) {
+    console.log('ERROR', err)
+    answers1.push(err)
+  }
+});
