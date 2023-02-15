@@ -11,12 +11,10 @@ module.exports = (path, keySet, saveFunc,  callback) => {
       enclosedChar : '"',
     }))
     .pipe(through2({ objectMode: true }, (row, enc, cb) => {
-      console.log('ROW', row)
       saveFunc(row)
         .then(() => {
           console.log(row)
           cb(null, true);
-          callback(null, row);
         })
         .catch((err) => {
           cb(err, null);

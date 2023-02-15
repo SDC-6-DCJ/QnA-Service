@@ -49,10 +49,10 @@ module.exports = {
     date: {
       type: Sequelize.STRING(15),
     },
-    anserer_name: {
+    answerer_name: {
       type: Sequelize.STRING(50),
     },
-    anserer_email: {
+    answerer_email: {
       type: Sequelize.STRING(100),
     },
     reported: {
