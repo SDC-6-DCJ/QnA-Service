@@ -13,16 +13,17 @@ CREATE TABLE questions (
   reported BOOLEAN
 );
 CREATE TABLE answers (
-  asnwer_id SERIAL NOT NULL PRIMARY KEY,
+  id SERIAL NOT NULL PRIMARY KEY,
   question_id INT NOT NULL,
   body VARCHAR(300),
-  date DATE,
+  date_written DATE,
   answerer_name VARCHAR(50),
-  helpfulness INT,
-  reported BOOLEAN
+  answerer_email VARCHAR(50),
+  reported BOOLEAN,
+  helpfulness INT
 );
 CREATE TABLE photos (
-  photo_id SERIAL NOT NULL PRIMARY KEY,
+  id SERIAL NOT NULL PRIMARY KEY,
   answer_id INT NOT NULL,
-  photo_url VARCHAR(100)
+  url VARCHAR(100)
 );
