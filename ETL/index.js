@@ -5,7 +5,7 @@ const schema = require('../tables.js')
 
 const { Sequelize, Model, DataTypes } = require('sequelize');
 
-const sequelize = new Sequelize('qna', 'yandlier', 'unset', {
+const sequelize = new Sequelize('qna', 'yandlier', '', {
   host: 'localhost',
   dialect: 'postgres',
 });
@@ -35,35 +35,35 @@ const badData = {
 };
 
 sequelize.sync()
-  .then(() => {
-    load(data.photos, keys.photos, Photos.create.bind(Photos), (err, good) => {
-      if (err) {
-        console.log('ERROR', err)
-        badData.photos.push(err)
-      }
-    });
-  })
-  .then(() => {
-    load(data.asnwers1, keys.answers, Answers.create.bind(Answers), (err, good) => {
-      if (err) {
-        console.log('ERROR', err)
-        badData.answers1.push(err)
-      }
-    });
-  })
-  .then(() => {
-    load(data.asnwers2, keys.answers, Answers.create.bind(Answers), (err, good) => {
-      if (err) {
-        console.log('ERROR', err)
-        badData.answers2.push(err)
-      }
-    });
-  })
-  .then(() => {
-    load(data.questions, keys.questions, Questions.create.bind(Questions), (err, good) => {
-      if (err) {
-        console.log('ERROR', err)
-        badData.questions.push(err)
-      }
-    });
-  })
+  // .then(() => {
+  //   load(data.photos, keys.photos, Photos.create.bind(Photos), (err, good) => {
+  //     if (err) {
+  //       console.log('ERROR', err)
+  //       badData.photos.push(err)
+  //     }
+  //   });
+  // })
+  // .then(() => {
+  //   load(data.asnwers1, keys.answers, Answers.create.bind(Answers), (err, good) => {
+  //     if (err) {
+  //       console.log('ERROR', err)
+  //       badData.answers1.push(err)
+  //     }
+  //   });
+  // })
+  // .then(() => {
+  //   load(data.asnwers2, keys.answers, Answers.create.bind(Answers), (err, good) => {
+  //     if (err) {
+  //       console.log('ERROR', err)
+  //       badData.answers2.push(err)
+  //     }
+  //   });
+  // })
+  // .then(() => {
+  //   load(data.questions, keys.questions, Questions.create.bind(Questions), (err, good) => {
+  //     if (err) {
+  //       console.log('ERROR', err)
+  //       badData.questions.push(err)
+  //     }
+  //   });
+  // });
