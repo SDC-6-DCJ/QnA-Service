@@ -8,7 +8,7 @@ const csv = require('csv-parser');
 const createCsvStringifier = require('csv-writer').createObjectCsvStringifier;
 const TransformStream = require('stream').Transform;
 
-const { int, string, bool } = require('./parse.js');
+const { int, string, bool } = require('../parse.js');
 
 const csvStringifier = createCsvStringifier({
   header: [
