@@ -8,7 +8,7 @@ const csv = require('csv-parser');
 const createCsvStringifier = require('csv-writer').createObjectCsvStringifier;
 const TransformStream = require('stream').Transform;
 
-const { int, string, bool } = require('./parse.js');
+const { int, string, bool } = require('../parse.js');
 
 const csvStringifier = createCsvStringifier({
   header: [
@@ -19,7 +19,8 @@ const csvStringifier = createCsvStringifier({
     { id: 'answerer_name', title: 'answerer_name' },
     { id: 'answerer_email', title: 'answerer_email' },
     { id: 'reported', title: 'reportd' },
-    { id: 'helpful', title: 'helpful' }],
+    { id: 'helpful', title: 'helpful' },
+  ],
 });
 
 const inputPath = path.join(__dirname, '/../src/answers.csv');
@@ -51,8 +52,7 @@ transformer._transform = (chunk, encoding, cb) => {
   cb(null, fixed.join(','));
 };
 
-const readStream = fs.createReadStream(inputPath)
-  .pipe(csv());
+const readStream = fs.createReadStream(inputPath).pipe(csv());
 const writeStream = fs.createWriteStream(outputPath);
 
 writeStream.write(csvStringifier.getHeaderString());
