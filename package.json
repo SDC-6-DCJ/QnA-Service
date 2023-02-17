@@ -3,11 +3,12 @@
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
-    "server-dev": "npx nodemon --watch server index.js",
-    "start": "node index.js",
+    "server-dev": "npx nodemon --watch server server/index.js",
+    "start": "node server/index.js",
     "create-db": "psql postgres -f sql/db.sql",
     "create-tables": "psql qna -f sql/tables.sql",
-    "etl": "node ETL/answers.js & node ETL/photos.js & node ETL/questions.js"
+    "etl": "node ETL/answers.js & node ETL/photos.js & node ETL/questions.js",
+    "load": "node ETL/load.js"
   },
   "dependencies": {
     "cors": "^2.8.5",
