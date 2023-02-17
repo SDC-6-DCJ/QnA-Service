@@ -23,8 +23,11 @@ const funcs = {
             return question;
           }))))
         .then((results) => {
-          console.log('results', results);
-          res.status(666).json(results);
+          const result = {};
+          result.product_id = product_id;
+          result.results = results;
+          console.log('result', result);
+          res.status(200).json(result);
         })
         .catch((err) => {
           console.error(err);
