@@ -1,10 +1,11 @@
+require('dotenv').config();
 const { Client } = require('pg');
 const path = require('path');
 
 const client = new Client({
   user: process.env.DB_USER,
   host: process.env.DB_HOST,
-  database: 'qna',
+  database: process.env.DB,
   password: process.env.DB_PW,
   port: process.env.DB_PORT,
 });
