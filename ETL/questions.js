@@ -6,7 +6,7 @@ const path = require('path');
 const fs = require('fs');
 const csv = require('csv-parser');
 const createCsvStringifier = require('csv-writer').createObjectCsvStringifier;
-const transformStream = require('stream').Transform;
+const TransformStream = require('stream').Transform;
 
 const { int, string, bool } = require('./parse.js');
 
@@ -31,18 +31,24 @@ const fix = ({
   id: int(id), // To INT
   product_id: int(product_id), // To INT
   body: string(body),
-  date: string(date),
+  date: int(date),
   asker_name: string(asker_name),
   asker_email: string(asker_email),
   reported: bool(reported),
   helpful: int(helpful),
 });
 
-const transformer = new transformStream({ objectMode: true });
+const transformer = new TransformStream({ objectMode: true });
 transformer._transform = (chunk, encoding, cb) => {
   let fixed = fix(chunk);
   fixed = csvStringifier.stringifyRecords([fixed]);
-  cb(null, fixed);
+
+  fixed = fixed.split(',');
+  fixed[2] = fixed[2][0] === '"' ? fixed[2] : `"${fixed[2]}"`;
+  fixed[4] = fixed[4][0] === '"' ? fixed[4] : `"${fixed[4]}"`;
+  fixed[5] = fixed[5][0] === '"' ? fixed[5] : `"${fixed[5]}"`;
+
+  cb(null, fixed.join(','));
 };
 
 const readStream = fs.createReadStream(inputPath)
