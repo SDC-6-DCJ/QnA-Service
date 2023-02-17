@@ -20,27 +20,9 @@ const data = {
   questions: path.join(__dirname, '/../src/questions.csv'),
 };
 
-// CREATE TABLESE
-const tablesSql = fs.readFileSync(path.join(__dirname, '/../sql/tables.sql'), 'utf8');
-client.query(tablesSql);
-
 // CLEANED ROWS
-const questions = fs.readFileSync(data.questions, 'utf8')
-  .trim() // Removes Whtie Space
-  .split('\n') // Splits on new lines
-  .map((line) => line.split(',')) // Splits each line into arrays
-  .map(([id, product_id, body, date, asker_name, asker_email, reported, helpful]) => ({
-    id: +id, // To INT
-    product_id: +product_id, // To INT
-    body,
-    date,
-    asker_name,
-    asker_email,
-    reported: !!+reported, // To BOOL
-    helpful: +helpful, // To INT
-  }));
 console.log('QUESTIONS TRANSFORMED');
-const answers1 = fs.readFileSync(data.answers1, 'utf8')
+let answers1 = fs.readFileSync(data.answers1, 'utf8')
   .trim() // Removes Whtie Space
   .split('\n') // Splits on new lines
   .map((line) => line.split(',')) // Splits each line into arrays
@@ -55,7 +37,7 @@ const answers1 = fs.readFileSync(data.answers1, 'utf8')
     helpful: +helpful, // To INT
   }));
 console.log('ANSWERS1 TRANSFORMED');
-const answers2 = fs.readFileSync(data.answers2, 'utf8')
+let answers2 = fs.readFileSync(data.answers2, 'utf8')
   .trim() // Removes Whtie Space
   .split('\n') // Splits on new lines
   .map((line) => line.split(',')) // Splits each line into arrays
@@ -70,7 +52,7 @@ const answers2 = fs.readFileSync(data.answers2, 'utf8')
     helpful: +helpful, // To INT
   }));
 console.log('ANSWERS2 TRANSFORMED');
-const photos = fs.readFileSync(data.photos, 'utf8')
+let photos = fs.readFileSync(data.photos, 'utf8')
   .trim() // Removes Whtie Space
   .split('\n') // Splits on new lines
   .map((line) => line.split(',')) // Splits each line into arrays
@@ -140,12 +122,32 @@ const promises = {
 client.connect()
   .then(() => Promise.all(promises.questions.slice(2000000)))
   .then(() => Promise.all(promises.questions.slice(0, 2000000)))
+  .then(() => {
+    promises.questions = null;
+    questions = undefined;
+    delete questions;
+  })
   .then(() => Promise.all(promises.answers1.slice(2000000)))
   .then(() => Promise.all(promises.answers1.slice(0, 2000000)))
+  .then(() => {
+    promises.answers1 = null;
+    answers1 = undefined;
+    delete answers1;
+  })
   .then(() => Promise.all(promises.answers2.slice(2000000)))
   .then(() => Promise.all(promises.answers2.slice(0, 2000000)))
+  .then(() => {
+    promises.answers2 = null;
+    answers2 = undefined;
+    delete answers2;
+  })
   .then(() => Promise.all(promises.photos.slice(2000000)))
   .then(() => Promise.all(promises.photos.slice(0, 2000000)))
+  .then(() => {
+    promises.photos = null;
+    photos = undefined;
+    delete photos;
+  })
   .then(() => console.log('ETL complete'))
   .catch((err) => {
     client.end();
