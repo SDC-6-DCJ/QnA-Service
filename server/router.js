@@ -8,4 +8,7 @@ router.get('/', (req, res) => {
   res.status(200).json(json);
 });
 
+// QUESTIONS
+router.get('/questions', controller.q.getQuestions);
+
 module.exports = router;

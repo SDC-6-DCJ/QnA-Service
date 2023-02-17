@@ -18,7 +18,7 @@ const csvStringifier = createCsvStringifier({
     { id: 'date', title: 'date' },
     { id: 'asker_name', title: 'asker_name' },
     { id: 'asker_email', title: 'asker_email' },
-    { id: 'reported', title: 'reportd' },
+    { id: 'reported', title: 'reported' },
     { id: 'helpful', title: 'helpful' }],
 });
 
