@@ -35,7 +35,8 @@ module.exports = {
   },
   p: {
     getAll: (q_id) => {
-      const sql = `SELECT * FROM photos
+      const sql = `SELECT id, url
+                   FROM photos
                    WHERE answer_id = $1`;
       return client.query(sql, [q_id]);
     },
