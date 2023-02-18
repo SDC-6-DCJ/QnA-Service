@@ -48,16 +48,16 @@ const funcs = {
       model.a.getAll(question_id, count, page)
         .then((answers) => Promise.all(answers.rows.map((answer) => model.p.getAll(answer.id)
           .then((photos) => {
+            answer.date = new Date(+answer.date);
             answer.photos = photos.rows;
             return answer;
           }))))
         .then((results) => {
           const result = {};
           result.question = question_id;
-          result.page = req.query.page - 1;
+          result.page = req.query.page ? req.query.page - 1 : 0;
           result.count = count;
           result.results = results;
-          console.log('result', result);
           res.status(200).json(result);
         })
         .catch((err) => {
@@ -65,9 +65,6 @@ const funcs = {
           res.sendStatus(500);
         });
     },
-  },
-  p: {
-
   },
 };
 

@@ -13,7 +13,8 @@ client.connect();
 module.exports = {
   q: {
     getAll: (p_id, count, offset) => {
-      const sql = `SELECT * FROM questions
+      const sql = `SELECT question_id,question_body,question_date,asker_name,asker_email,reported,question_helpfulness
+                   FROM questions
                    WHERE product_id = $1
                    AND reported = ${false}
                    ORDER BY question_helpfulness DESC, question_id ASC
@@ -23,7 +24,8 @@ module.exports = {
   },
   a: {
     getAll: (q_id, count, offset) => {
-      const sql = `SELECT * FROM answers
+      const sql = `SELECT id, body, date, answerer_name, answerer_email, reported, helpfulness
+                   FROM answers
                    WHERE question_id = $1
                    AND reported = ${false}
                    ORDER BY helpfulness DESC, id ASC
