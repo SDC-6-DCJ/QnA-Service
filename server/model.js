@@ -37,6 +37,12 @@ const funcs = {
                    WHERE question_id = $1`;
       return client.query(sql, [question_id]);
     },
+    report: (question_id) => {
+      const sql = `UPDATE questions
+                   SET reported = ${true}
+                   WHERE question_id = $1`;
+      return client.query(sql, [question_id]);
+    },
   },
   a: {
     getAll: (q_id, count, offset) => {
@@ -66,6 +72,12 @@ const funcs = {
       const sql = `UPDATE answers
                      SET helpfulness = helpfulness + 1
                      WHERE id = $1`;
+      return client.query(sql, [id]);
+    },
+    report: (id) => {
+      const sql = `UPDATE answers
+                   SET reported = ${true}
+                   WHERE id = $1`;
       return client.query(sql, [id]);
     },
   },

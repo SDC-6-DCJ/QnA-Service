@@ -55,6 +55,15 @@ const funcs = {
           console.status(500).json(err);
         });
     },
+    report: (req, res) => {
+      if (!req.params.question_id) res.status(400).json({ error: 'please supply a question_id' });
+      model.q.report(req.params.question_id)
+        .then(() => res.sendStatus(204))
+        .catch((err) => {
+          console.error(err);
+          console.status(500).json(err);
+        });
+    },
   },
   a: {
     getAnswers: (req, res) => {
@@ -98,6 +107,15 @@ const funcs = {
     helpful: (req, res) => {
       if (!req.params.answer_id) res.status(400).json({ error: 'please supply a answer_id' });
       model.a.putHelpful(req.params.answer_id)
+        .then(() => res.sendStatus(204))
+        .catch((err) => {
+          console.error(err);
+          console.status(500).json(err);
+        });
+    },
+    report: (req, res) => {
+      if (!req.params.answer_id) res.status(400).json({ error: 'please supply a answer_id' });
+      model.a.report(req.params.answer_id)
         .then(() => res.sendStatus(204))
         .catch((err) => {
           console.error(err);
