@@ -29,7 +29,6 @@ const funcs = {
           const result = {};
           result.product_id = product_id;
           result.results = results;
-          console.log('result', result);
           res.status(200).json(result);
         })
         .catch((err) => {
@@ -95,7 +94,7 @@ const funcs = {
         });
     },
     postAnswer: (req, res) => {
-      if (!req.body.question_id) res.status(400).json({ error: 'please supply a question_id' });
+      if (!req.params.question_id) res.status(400).json({ error: 'please supply a question_id' });
       req.body.question_id = req.params.question_id;
       model.a.insert(req.body)
         .then(() => res.sendStatus(201))

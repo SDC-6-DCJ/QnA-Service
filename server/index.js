@@ -15,5 +15,5 @@ app.use(express.json());
 
 app.use('/', router);
 
-app.listen(port);
+module.exports = app.listen(port);
 console.log(`LISTENING AT PORT: ${port}`);
