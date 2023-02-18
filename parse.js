@@ -1,7 +1,9 @@
+/* eslint-disable no-param-reassign */
 module.exports = {
   int: (input) => {
     if (input === null || undefined) return null;
-    return +input.replace(/\D/g, '');
+    input = input.replace(/\D/g, '');
+    return +input;
   },
   string: (input) => (input ? input.toString() : 'null'),
   bool: (input) => {

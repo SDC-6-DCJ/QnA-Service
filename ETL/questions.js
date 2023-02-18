@@ -12,30 +12,37 @@ const { int, string, bool } = require('../parse.js');
 
 const csvStringifier = createCsvStringifier({
   header: [
-    { id: 'id', title: 'id' },
+    { id: 'question_id', title: 'question_id' },
     { id: 'product_id', title: 'product_id' },
-    { id: 'body', title: 'body' },
-    { id: 'date', title: 'date' },
+    { id: 'question_body', title: 'question_body' },
+    { id: 'question_date', title: 'question_date' },
     { id: 'asker_name', title: 'asker_name' },
     { id: 'asker_email', title: 'asker_email' },
     { id: 'reported', title: 'reported' },
-    { id: 'helpful', title: 'helpful' }],
+    { id: 'question_helpfulness', title: 'question_helpfulness' }],
 });
 
 const inputPath = path.join(__dirname, '/../src/questions.csv');
 const outputPath = path.join(__dirname, '/../src/cleanQuestions.csv');
 
 const fix = ({
-  id, product_id, body, date, asker_name, asker_email, reported, helpful,
+  question_id,
+  product_id,
+  question_body,
+  question_date,
+  asker_name,
+  asker_email,
+  reported,
+  question_helpfulness,
 }) => ({
-  id: int(id), // To INT
+  question_id: int(question_id), // To INT
   product_id: int(product_id), // To INT
-  body: string(body),
-  date: int(date),
+  question_body: string(question_body),
+  question_date: int(question_date),
   asker_name: string(asker_name),
   asker_email: string(asker_email),
   reported: bool(reported),
-  helpful: int(helpful),
+  question_helpfulness: int(question_helpfulness),
 });
 
 const transformer = new TransformStream({ objectMode: true });

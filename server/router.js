@@ -11,4 +11,7 @@ router.get('/', (req, res) => {
 // QUESTIONS
 router.get('/questions', controller.q.getQuestions);
 
+// ANSWERS
+router.get('/questions/:question_id/answers', controller.a.getAnswers);
+
 module.exports = router;

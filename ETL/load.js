@@ -11,8 +11,8 @@ const client = new Client({
 });
 
 client.connect()
-  .then(() => client.query(`COPY questions(id,product_id,body,date,asker_name,asker_email,reported,helpful) FROM '${path.join(__dirname, '/../src/cleanQuestions.csv')}' DELIMITER ',' CSV HEADER`))
-  .then(() => client.query(`COPY answers(id,question_id,body,date,answerer_name,answerer_email,reported,helpful) FROM '${path.join(__dirname, '/../src/cleanAnswers.csv')}' DELIMITER ',' CSV HEADER`))
+  .then(() => client.query(`COPY questions(question_id,product_id,question_body,question_date,asker_name,asker_email,reported,question_helpfulness) FROM '${path.join(__dirname, '/../src/cleanQuestions.csv')}' DELIMITER ',' CSV HEADER`))
+  .then(() => client.query(`COPY answers(id,question_id,body,date,answerer_name,answerer_email,reported,helpfulness) FROM '${path.join(__dirname, '/../src/cleanAnswers.csv')}' DELIMITER ',' CSV HEADER`))
   .then(() => client.query(`COPY photos(id,answer_id,url) FROM '${path.join(__dirname, '/../src/cleanPhotos.csv')}' DELIMITER ',' CSV HEADER`))
   .then(() => console.log('LOAD COMPLETE'))
   .then(() => client.end());

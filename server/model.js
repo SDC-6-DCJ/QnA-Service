@@ -16,7 +16,7 @@ module.exports = {
       const sql = `SELECT * FROM questions
                    WHERE product_id = $1
                    AND reported = ${false}
-                   ORDER BY helpful DESC, id ASC
+                   ORDER BY question_helpfulness DESC, question_id ASC
                    LIMIT $2 OFFSET $3`;
       return client.query(sql, [p_id, count, offset]);
     },
@@ -26,7 +26,7 @@ module.exports = {
       const sql = `SELECT * FROM answers
                    WHERE question_id = $1
                    AND reported = ${false}
-                   ORDER BY helpful DESC, id ASC
+                   ORDER BY helpfulness DESC, id ASC
                    LIMIT $2 OFFSET $3`;
       return client.query(sql, [q_id, count, offset]);
     },

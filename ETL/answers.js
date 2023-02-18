@@ -19,7 +19,7 @@ const csvStringifier = createCsvStringifier({
     { id: 'answerer_name', title: 'answerer_name' },
     { id: 'answerer_email', title: 'answerer_email' },
     { id: 'reported', title: 'reported' },
-    { id: 'helpful', title: 'helpful' },
+    { id: 'helpfulness', title: 'helpfulness' },
   ],
 });
 
@@ -27,7 +27,7 @@ const inputPath = path.join(__dirname, '/../src/answers.csv');
 const outputPath = path.join(__dirname, '/../src/cleanAnswers.csv');
 
 const fix = ({
-  id, question_id, body, date, answerer_name, answerer_email, reported, helpful,
+  id, question_id, body, date, answerer_name, answerer_email, reported, helpfulness,
 }) => ({
   id: int(id), // To INT
   question_id: int(question_id), // To INT
@@ -36,7 +36,7 @@ const fix = ({
   answerer_name: string(answerer_name),
   answerer_email: string(answerer_email),
   reported: bool(reported),
-  helpful: int(helpful),
+  helpfulness: int(helpfulness),
 });
 
 const transformer = new TransformStream({ objectMode: true });
