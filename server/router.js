@@ -11,10 +11,13 @@ router.get('/', (req, res) => {
 // QUESTIONS
 router.get('/questions', controller.q.getQuestions);
 router.post('/questions', controller.q.postQuestion);
+router.put('/questions/:question_id/helpful', controller.q.helpful);
+// router.put('/questions/:question_id/report', controller.q.report);
 
 // ANSWERS
 router.get('/questions/:question_id/answers', controller.a.getAnswers);
 router.post('/questions/:question_id/answers', controller.a.postAnswer);
+router.put('/answers/:answer_id/helpful', controller.a.helpful);
 
 // DEV
 router.post('/dev/postQ', (req, res) => {

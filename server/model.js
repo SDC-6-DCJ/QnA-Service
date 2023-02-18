@@ -31,6 +31,12 @@ const funcs = {
                    values ($1, $2, $3, $4, $5, $6, $7, $8)`;
         return client.query(sql, [maxId, product_id, body, Date.now(), email, name, false, 0]);
       }),
+    putHelpful: (question_id) => {
+      const sql = `UPDATE questions
+                   SET question_helpfulness = question_helpfulness + 1
+                   WHERE question_id = $1`;
+      return client.query(sql, [question_id]);
+    },
   },
   a: {
     getAll: (q_id, count, offset) => {
@@ -56,6 +62,12 @@ const funcs = {
             url: photo,
           }))));
       }),
+    putHelpful: (id) => {
+      const sql = `UPDATE answers
+                     SET helpfulness = helpfulness + 1
+                     WHERE id = $1`;
+      return client.query(sql, [id]);
+    },
   },
   p: {
     getAll: (q_id) => {

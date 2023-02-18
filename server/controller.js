@@ -38,11 +38,21 @@ const funcs = {
         });
     },
     postQuestion: (req, res) => {
+      if (!req.body.product_id) res.status(400).json({ error: 'please supply a product_id' });
       model.q.insert(req.body)
         .then(() => res.sendStatus(201))
         .catch((err) => {
           console.error(err);
           res.status(500).json(err);
+        });
+    },
+    helpful: (req, res) => {
+      if (!req.params.question_id) res.status(400).json({ error: 'please supply a question_id' });
+      model.q.putHelpful(req.params.question_id)
+        .then(() => res.sendStatus(204))
+        .catch((err) => {
+          console.error(err);
+          console.status(500).json(err);
         });
     },
   },
@@ -51,6 +61,7 @@ const funcs = {
       const question_id = int(req.params.question_id);
       let { page, count } = req.query;
 
+      if (!question_id) res.status(400).json({ error: 'please supply a question_id' });
       count = count ? int(count) : 5;
       page = page ? (int(page) - 1) * count : 0;
 
@@ -75,12 +86,22 @@ const funcs = {
         });
     },
     postAnswer: (req, res) => {
-      req.body.question_id = req.params.question_id
+      if (!req.body.question_id) res.status(400).json({ error: 'please supply a question_id' });
+      req.body.question_id = req.params.question_id;
       model.a.insert(req.body)
         .then(() => res.sendStatus(201))
         .catch((err) => {
           console.error(err);
           res.status(500).json(err);
+        });
+    },
+    helpful: (req, res) => {
+      if (!req.params.answer_id) res.status(400).json({ error: 'please supply a answer_id' });
+      model.a.putHelpful(req.params.answer_id)
+        .then(() => res.sendStatus(204))
+        .catch((err) => {
+          console.error(err);
+          console.status(500).json(err);
         });
     },
   },
