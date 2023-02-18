@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
 const model = require('./model.js');
-const { int, string, bool } = require('../parse.js');
+const { int } = require('../parse.js');
 
 const funcs = {
   q: {

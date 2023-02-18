@@ -20,15 +20,4 @@ router.post('/questions/:question_id/answers', controller.a.postAnswer);
 router.put('/answers/:answer_id/helpful', controller.a.helpful);
 router.put('/answers/:answer_id/report', controller.a.report);
 
-// DEV
-router.post('/dev/postQ', (req, res) => {
-  req.body = {
-    body: 'Hey does this work?',
-    name: 'GOLIATH',
-    email: 'Yeye@kanye.diesel',
-    product_id: 942348,
-  };
-  controller.q.postQuestion(req, res);
-});
-
 module.exports = router;
