@@ -7,6 +7,7 @@ const funcs = {
     getQuestions: (req, res) => {
       let { product_id, page, count } = req.query;
 
+      if (!product_id) res.status(400).json({ error: 'please supply a product_id' });
       product_id = int(product_id);
       count = count ? int(count) : 5;
       page = page ? (int(page) - 1) * count : 0;
@@ -36,6 +37,14 @@ const funcs = {
           res.sendStatus(500);
         });
     },
+    postQuestion: (req, res) => {
+      model.q.insert(req.body)
+        .then(() => res.sendStatus(201))
+        .catch((err) => {
+          console.error(err);
+          res.status(500).json(err);
+        });
+    },
   },
   a: {
     getAnswers: (req, res) => {
@@ -63,6 +72,15 @@ const funcs = {
         .catch((err) => {
           console.error(err);
           res.sendStatus(500);
+        });
+    },
+    postAnswer: (req, res) => {
+      req.body.question_id = req.params.question_id
+      model.a.insert(req.body)
+        .then(() => res.sendStatus(201))
+        .catch((err) => {
+          console.error(err);
+          res.status(500).json(err);
         });
     },
   },
