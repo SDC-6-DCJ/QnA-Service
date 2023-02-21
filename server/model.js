@@ -23,14 +23,13 @@ const funcs = {
     },
     insert: ({
       product_id, name, email, body,
-    }) => client.query('SELECT MAX(question_id) from "questions"')
-      .then((data) => {
-        const maxId = data.rows[0].max + 1;
-        const sql = `INSERT INTO
-                   questions (question_id, product_id, question_body, question_date, asker_email, asker_name, reported, question_helpfulness)
-                   values ($1, $2, $3, $4, $5, $6, $7, $8)`;
-        return client.query(sql, [maxId, product_id, body, Date.now(), email, name, false, 0]);
-      }),
+    }) => {
+      const sql = `INSERT INTO
+                  questions (product_id, question_body, question_date, asker_email, asker_name, reported, question_helpfulness)
+                  values ($1, $2, $3, $4, $5, $6, $7)`;
+                  console.log([product_id, body, Date.now(), email, name, false, 0])
+      return client.query(sql, [product_id, body, Date.now(), email, name, false, 0]);
+    },
     putHelpful: (question_id) => {
       const sql = `UPDATE questions
                    SET question_helpfulness = question_helpfulness + 1
@@ -56,18 +55,16 @@ const funcs = {
     },
     insert: ({
       question_id, name, email, body, photos,
-    }) => client.query('SELECT MAX(id) from "answers"')
-      .then((data) => {
-        const maxId = data.rows[0].max + 1;
+    }) => {
         const sql = `INSERT INTO
-                   answers (id, question_id, body, date, answerer_email, answerer_name, reported, helpfulness)
-                   values ($1, $2, $3, $4, $5, $6, $7, $8)`;
-        return client.query(sql, [maxId, question_id, body, Date.now(), email, name, false, 0])
+                   answers (question_id, body, date, answerer_email, answerer_name, reported, helpfulness)
+                   values ($1, $2, $3, $4, $5, $6, $7)`;
+        return client.query(sql, [question_id, body, Date.now(), email, name, false, 0])
           .then(() => Promise.all(photos.map((photo) => funcs.p.insert({
             answer_id: maxId,
             url: photo,
           }))));
-      }),
+      },
     putHelpful: (id) => {
       const sql = `UPDATE answers
                      SET helpfulness = helpfulness + 1
@@ -90,14 +87,13 @@ const funcs = {
     },
     insert: ({
       answer_id, url,
-    }) => client.query('SELECT MAX(id) from "photos"')
-      .then((data) => {
+    }) => {
         const maxId = data.rows[0].max + 1;
         const sql = `INSERT INTO
-                  photos (id, answer_id, url)
-                  values ($1, $2, $3)`;
-        return client.query(sql, [maxId, answer_id, url]);
-      }),
+                  photos (answer_id, url)
+                  values ($1, $2)`;
+        return client.query(sql, [answer_id, url]);
+      },
   },
 };
 

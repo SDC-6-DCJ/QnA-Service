@@ -31,7 +31,12 @@ describe('Question Endpoints', () => {
     expect(res.status).toBe(204);
   });
 });
-
+console.log(JSON.stringify({
+  photos: ['this is not a url, cause that would take to long and be far too much effort'],
+  name: 'Goose',
+  email: 'Perry@The.platapus',
+  body: 'A platapus? PEEEERRY THE PLATAPUS??',
+}))
 describe('Answer Endpoints', () => {
   it('Get /questions/:question_id/answers', async () => {
     const res = await req(api).get('/questions/3316054/answers');

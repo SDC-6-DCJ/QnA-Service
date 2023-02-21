@@ -37,6 +37,7 @@ const funcs = {
         });
     },
     postQuestion: (req, res) => {
+      console.log(req.body)
       if (!req.body.product_id) res.status(400).json({ error: 'please supply a product_id' });
       model.q.insert(req.body)
         .then(() => res.sendStatus(201))
