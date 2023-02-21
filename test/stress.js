@@ -13,7 +13,7 @@ const tests = {
     sleep(1);
 
     check(res, {
-      "Good Status - 200": (r) => r.status === 200,
+      'Good Status - 200': (r) => r.status === 200,
     });
   },
   insertQ: () => {
@@ -24,16 +24,16 @@ const tests = {
       email: 'x',
       product_id: id,
     };
-    const res = http.post(`http://localhost:3000/questions`, JSON.stringify(body), {
+    const res = http.post('http://localhost:3000/questions', JSON.stringify(body), {
       headers: { 'Content-Type': 'application/json' },
     });
     sleep(1);
 
     check(res, {
-      "Created Status - 201": (r) => r.status === 201,
+      'Created Status - 201': (r) => r.status === 201,
     });
-  }
-}
+  },
+};
 
 export default function () {
   tests.insertQ();

@@ -27,7 +27,7 @@ const funcs = {
       const sql = `INSERT INTO
                   questions (product_id, question_body, question_date, asker_email, asker_name, reported, question_helpfulness)
                   values ($1, $2, $3, $4, $5, $6, $7)`;
-                  console.log([product_id, body, Date.now(), email, name, false, 0])
+      console.log([product_id, body, Date.now(), email, name, false, 0]);
       return client.query(sql, [product_id, body, Date.now(), email, name, false, 0]);
     },
     putHelpful: (question_id) => {
@@ -56,19 +56,19 @@ const funcs = {
     insert: ({
       question_id, name, email, body, photos,
     }) => {
-        const sql = `INSERT INTO
+      const sql = `INSERT INTO
                      answers (question_id, body, date, answerer_email, answerer_name, reported, helpfulness)
                      values ($1, $2, $3, $4, $5, $6, $7)`;
-        if (photos) {
-          return client.query(sql, [question_id, body, Date.now(), email, name, false, 0])
-        }
-        return client.query(sql, [question_id, body, Date.now(), email, name, false, 0])
-          .then(() => client.query('SELECT MAX(id) FROM “answers"'))
-          .then((maxId) => Promise.all(photos.map((photo) => funcs.p.insert({
-            answer_id: maxId,
-            url: photo,
-          }))));
-      },
+      if (photos) {
+        return client.query(sql, [question_id, body, Date.now(), email, name, false, 0]);
+      }
+      return client.query(sql, [question_id, body, Date.now(), email, name, false, 0])
+        .then(() => client.query('SELECT MAX(id) FROM “answers"'))
+        .then((maxId) => Promise.all(photos.map((photo) => funcs.p.insert({
+          answer_id: maxId,
+          url: photo,
+        }))));
+    },
     putHelpful: (id) => {
       const sql = `UPDATE answers
                      SET helpfulness = helpfulness + 1
@@ -92,12 +92,11 @@ const funcs = {
     insert: ({
       answer_id, url,
     }) => {
-        const maxId = data.rows[0].max + 1;
-        const sql = `INSERT INTO
+      const sql = `INSERT INTO
                   photos (answer_id, url)
                   values ($1, $2)`;
-        return client.query(sql, [answer_id, url]);
-      },
+      return client.query(sql, [answer_id, url]);
+    },
   },
 };
 
