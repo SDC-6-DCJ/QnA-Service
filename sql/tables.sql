@@ -29,7 +29,8 @@ CREATE TABLE IF NOT EXISTS answers (
   answerer_name VARCHAR(50),
   answerer_email VARCHAR(100),
   reported BOOLEAN,
-  helpfulness SMALLINT
+  helpfulness SMALLINT,
+  photos VARCHAR(1000)[]
 );
 CREATE INDEX IF NOT EXISTS question_id_index ON answers(question_id);
 

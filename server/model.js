@@ -57,10 +57,14 @@ const funcs = {
       question_id, name, email, body, photos,
     }) => {
         const sql = `INSERT INTO
-                   answers (question_id, body, date, answerer_email, answerer_name, reported, helpfulness)
-                   values ($1, $2, $3, $4, $5, $6, $7)`;
+                     answers (question_id, body, date, answerer_email, answerer_name, reported, helpfulness)
+                     values ($1, $2, $3, $4, $5, $6, $7)`;
+        if (photos) {
+          return client.query(sql, [question_id, body, Date.now(), email, name, false, 0])
+        }
         return client.query(sql, [question_id, body, Date.now(), email, name, false, 0])
-          .then(() => Promise.all(photos.map((photo) => funcs.p.insert({
+          .then(() => client.query('SELECT MAX(id) FROM “answers"'))
+          .then((maxId) => Promise.all(photos.map((photo) => funcs.p.insert({
             answer_id: maxId,
             url: photo,
           }))));
