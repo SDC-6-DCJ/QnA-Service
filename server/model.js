@@ -27,7 +27,6 @@ const funcs = {
       const sql = `INSERT INTO
                   questions (product_id, question_body, question_date, asker_email, asker_name, reported, question_helpfulness)
                   values ($1, $2, $3, $4, $5, $6, $7)`;
-      console.log([product_id, body, Date.now(), email, name, false, 0]);
       return client.query(sql, [product_id, body, Date.now(), email, name, false, 0]);
     },
     putHelpful: (question_id) => {

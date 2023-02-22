@@ -94,7 +94,6 @@ const funcs = {
         });
     },
     postAnswer: (req, res) => {
-      console.log(req.body);
       if (!req.params.question_id) res.status(400).json({ error: 'please supply a question_id' });
       req.body.question_id = req.params.question_id;
       model.a.insert(req.body)
