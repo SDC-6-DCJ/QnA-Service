@@ -9,27 +9,28 @@ DROP TABLE answers CASCADE;
 DROP TABLE photos;
 
 CREATE TABLE IF NOT EXISTS questions (
-  id SERIAL NOT NULL PRIMARY KEY,
+  question_id SERIAL NOT NULL PRIMARY KEY,
   product_id INT NOT NULL,
-  body VARCHAR(300),
-  date BIGINT,
+  question_body VARCHAR(300),
+  question_date BIGINT,
   asker_name VARCHAR(50),
   asker_email VARCHAR(100),
   reported BOOLEAN,
-  helpful SMALLINT
+  question_helpfulness SMALLINT
 );
 CREATE INDEX IF NOT EXISTS product_id_index ON questions(product_id);
 
 
 CREATE TABLE IF NOT EXISTS answers (
   id SERIAL NOT NULL PRIMARY KEY,
-  question_id INT NOT NULL REFERENCES questions(id),
+  question_id INT NOT NULL REFERENCES questions(question_id),
   body VARCHAR(300),
   date BIGINT,
   answerer_name VARCHAR(50),
   answerer_email VARCHAR(100),
   reported BOOLEAN,
-  helpful SMALLINT
+  helpfulness SMALLINT,
+  photos VARCHAR(1000)[]
 );
 CREATE INDEX IF NOT EXISTS question_id_index ON answers(question_id);
 

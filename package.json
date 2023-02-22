@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "main": "index.js",
   "scripts": {
-    "server-dev": "npx nodemon --watch server server/index.js",
-    "start": "node server/index.js",
+    "server-dev": "npx nodemon -w server -r newrelic server",
+    "start": "node -r newrelic server",
     "create-db": "psql postgres -f sql/db.sql",
     "create-tables": "psql qna -f sql/tables.sql",
     "etl": "node ETL/answers.js & node ETL/photos.js & node ETL/questions.js",
@@ -19,13 +19,17 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "fs": "^0.0.1-security",
+    "jest": "^29.4.3",
+    "k6": "^0.0.0",
     "morgan": "^1.10.0",
     "ndjson": "^2.0.0",
+    "newrelic": "^9.10.2",
     "path": "^0.12.7",
     "pg": "^8.9.0",
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.28.0",
     "stream": "^0.0.2",
+    "supertest": "^6.3.3",
     "through2": "^4.0.2"
   },
   "devDependencies": {
