@@ -1,4 +1,5 @@
 const router = require('express').Router();
+const fs = require('fs');
 const controller = require('./controller');
 
 router.get('/', (req, res) => {
@@ -6,6 +7,19 @@ router.get('/', (req, res) => {
     hello: 'world',
   };
   res.status(200).json(json);
+});
+
+router.get('/loaderio-ef6453b814f1bba8194a12a2c967b47e.txt', (req, res) => {
+  fs.readFile('../loaderio-ef6453b814f1bba8194a12a2c967b47e.txt', 'utf8', (err, data) => {
+    if (err) {
+      console.log(err);
+      res.writeHead(500, { 'Content-Type': 'text/plain' });
+      res.end('Internal server error');
+    } else {
+      res.writeHead(200, { 'Content-Type': 'text/plain' });
+      res.end(data);
+    }
+  });
 });
 
 // QUESTIONS

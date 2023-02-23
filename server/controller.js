@@ -14,12 +14,10 @@ const funcs = {
 
       model.q.getAll(product_id, count, page)
         .then((data) => Promise.all(data.rows.map((question) => model.a.getAll(question.question_id)
-          .then((answers) => Promise.all(answers.rows.map((answer) => model.p.getAll(answer.id)
-            .then((photos) => {
-              answer.date = new Date(+answer.date);
-              answer.photos = photos.rows;
-              return answer;
-            }))))
+          .then((answers) => Promise.all(answers.rows.map((answer) => {
+            answer.date = new Date(+answer.date);
+            return answer;
+          })))
           .then((answers) => {
             question.question_date = new Date(+question.question_date);
             question.answers = answers;
@@ -74,17 +72,15 @@ const funcs = {
       page = page ? (int(page) - 1) * count : 0;
 
       model.a.getAll(question_id, count, page)
-        .then((answers) => Promise.all(answers.rows.map((answer) => model.p.getAll(answer.id)
-          .then((photos) => {
-            answer.date = new Date(+answer.date);
-            answer.photos = photos.rows;
-            return answer;
-          }))))
+        .then((answers) => Promise.all(answers.rows.map((answer) => {
+          answer.date = new Date(+answer.date);
+          return answer;
+        })))
         .then((results) => {
           const result = {};
           result.question = question_id;
           result.page = req.query.page ? req.query.page - 1 : 0;
-          result.count = count;
+          result.count = results.length;
           result.results = results;
           res.status(200).json(result);
         })
