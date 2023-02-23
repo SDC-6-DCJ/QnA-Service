@@ -6,7 +6,6 @@
 
 DROP TABLE questions CASCADE;
 DROP TABLE answers CASCADE;
-DROP TABLE photos;
 
 CREATE TABLE IF NOT EXISTS questions (
   question_id SERIAL NOT NULL PRIMARY KEY,
@@ -30,15 +29,6 @@ CREATE TABLE IF NOT EXISTS answers (
   answerer_email VARCHAR(100),
   reported BOOLEAN,
   helpfulness SMALLINT,
-  photos VARCHAR(1000)[]
+  photos JSONB
 );
 CREATE INDEX IF NOT EXISTS question_id_index ON answers(question_id);
-
-
-CREATE TABLE IF NOT EXISTS photos (
-  id SERIAL NOT NULL PRIMARY KEY,
-  answer_id INT NOT NULL REFERENCES answers(id),
-  url VARCHAR(1000) NOT NULL
-);
-CREATE INDEX IF NOT EXISTS answer_id_index ON photos(answer_id);
-
