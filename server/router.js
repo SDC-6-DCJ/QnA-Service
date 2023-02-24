@@ -9,8 +9,8 @@ router.get('/', (req, res) => {
   res.status(200).json(json);
 });
 
-router.get('/loaderio-ef6453b814f1bba8194a12a2c967b47e.txt', (req, res) => {
-  fs.readFile('../loaderio-ef6453b814f1bba8194a12a2c967b47e.txt', 'utf8', (err, data) => {
+router.get('/loaderio-9e2674caf5773afa6c32e4719433a0d0.txt', (req, res) => {
+  fs.readFile('../loaderToken.txt', 'utf8', (err, data) => {
     if (err) {
       console.log(err);
       res.writeHead(500, { 'Content-Type': 'text/plain' });
