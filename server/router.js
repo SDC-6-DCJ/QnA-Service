@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const fs = require('fs');
+const path = require('path');
 const controller = require('./controller');
 
 router.get('/', (req, res) => {
@@ -10,7 +11,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/loaderio-9e2674caf5773afa6c32e4719433a0d0.txt', (req, res) => {
-  fs.readFile('../loaderToken.txt', 'utf8', (err, data) => {
+  fs.readFile(path.join(__dirname, './loaderToken'), 'utf8', (err, data) => {
     if (err) {
       console.log(err);
       res.writeHead(500, { 'Content-Type': 'text/plain' });
