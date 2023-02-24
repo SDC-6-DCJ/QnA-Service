@@ -4,13 +4,13 @@ import { sleep, check } from 'k6';
 
 const opts = {
   soak: {
-    vus: 100,
-    duration: '180s',
+    vus: 200,
+    duration: '20m',
   },
   ramp: {
     stages: [
-      { duration: '1m', target: 300 },
-      { duration: '3m', target: 300 },
+      { duration: '1m', target: 200 },
+      { duration: '3m', target: 200 },
       { duration: '30s', target: 0 },
     ],
   },

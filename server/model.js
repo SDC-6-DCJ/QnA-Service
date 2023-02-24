@@ -65,7 +65,16 @@ const funcs = {
       const sql = `INSERT INTO
                      answers (question_id, body, date, answerer_email, answerer_name, reported, helpfulness, photos)
                      values ($1, $2, $3, $4, $5, $6, $7, $8)`;
-      return client.query(sql, [question_id, body, Date.now(), email, name, false, 0, JSON.stringify(parsedPhotos)]);
+      return client.query(sql, [
+        question_id,
+        body,
+        Date.now(),
+        email,
+        name,
+        false,
+        0,
+        JSON.stringify(parsedPhotos),
+      ]);
     },
     putHelpful: (id) => {
       const sql = `UPDATE answers
