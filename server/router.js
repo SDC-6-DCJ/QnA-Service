@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
   res.status(200).json(json);
 });
 
-router.get('/loaderio-048394e26585e765f2194726b5e97b61.txt', (req, res) => {
+router.get('/loaderio-8b2ee3aab2c64b3524116a998b724a79.txt', (req, res) => {
   res.sendFile(path.join(__dirname, './loaderToken.txt'));
 });
 
