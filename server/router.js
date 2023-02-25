@@ -10,7 +10,7 @@ router.get('/', (req, res) => {
   res.status(200).json(json);
 });
 
-router.get('/loaderio-9e2674caf5773afa6c32e4719433a0d0.txt', (req, res) => {
+router.get('/loaderio-048394e26585e765f2194726b5e97b61', (req, res) => {
   fs.readFile(path.join(__dirname, './loaderToken.txt'), 'utf8', (err, data) => {
     if (err) {
       console.log(err);
