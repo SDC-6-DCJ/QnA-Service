@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const fs = require('fs');
 const path = require('path');
 const controller = require('./controller');
 
@@ -10,17 +9,8 @@ router.get('/', (req, res) => {
   res.status(200).json(json);
 });
 
-router.get('/loaderio-048394e26585e765f2194726b5e97b61', (req, res) => {
-  fs.readFile(path.join(__dirname, './loaderToken.txt'), 'utf8', (err, data) => {
-    if (err) {
-      console.log(err);
-      res.writeHead(500, { 'Content-Type': 'text/plain' });
-      res.end('Internal server error');
-    } else {
-      res.writeHead(200, { 'Content-Type': 'text/plain' });
-      res.end(data);
-    }
-  });
+router.get('/loaderio-048394e26585e765f2194726b5e97b61.txt', (req, res) => {
+  res.sendFile(path.join(__dirname, './loaderToken.txt'));
 });
 
 // QUESTIONS

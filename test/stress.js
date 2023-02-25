@@ -17,19 +17,20 @@ const opts = {
   spike: {
     stages: [
       { duration: '1m', target: 100 },
-      { duration: '15s', target: 650 },
-      { duration: '1m', target: 600 },
+      { duration: '15s', target: 1000 },
+      { duration: '1m', target: 900 },
       { duration: '15s', target: 100 },
     ],
   },
 };
 
-export const options = opts.soak;
+export const options = opts.spike;
+const url = 'http://184.169.243.99';
 
 const tests = {
   allQs: () => {
     const id = 922349 + Math.floor(Math.random() * 20000);
-    const res = http.get(`http://localhost:3000/questions?product_id=${id}`);
+    const res = http.get(`${url}/questions?product_id=${id}`);
     sleep(1);
 
     check(res, {
@@ -44,7 +45,7 @@ const tests = {
       email: 'x',
       product_id: id,
     };
-    const res = http.post('http://localhost:3000/questions', JSON.stringify(body), {
+    const res = http.post(`${url}/questions`, JSON.stringify(body), {
       headers: { 'Content-Type': 'application/json' },
     });
     sleep(1);
@@ -55,7 +56,7 @@ const tests = {
   },
   helpfulQ: () => {
     const id = 3250000 + Math.floor(Math.random() * 25000);
-    const res = http.put(`http://localhost:3000/questions/${id}/helpful`);
+    const res = http.put(`${url}/questions/${id}/helpful`);
     sleep(1);
 
     check(res, {
@@ -64,7 +65,7 @@ const tests = {
   },
   reportQ: () => {
     const id = 3250000 + Math.floor(Math.random() * 25000);
-    const res = http.put(`http://localhost:3000/questions/${id}/report`);
+    const res = http.put(`${url}/questions/${id}/report`);
     sleep(1);
 
     check(res, {
@@ -73,7 +74,7 @@ const tests = {
   },
   allAs: () => {
     const id = 3000000 + Math.floor(Math.random() * 25000);
-    const res = http.get(`http://localhost:3000/questions/${id}/answers`);
+    const res = http.get(`${url}/questions/${id}/answers`);
     sleep(1);
 
     check(res, {
@@ -88,7 +89,7 @@ const tests = {
       email: 'x',
       photos: [],
     };
-    const res = http.post(`http://localhost:3000/questions/${id}/answers`, JSON.stringify(body), {
+    const res = http.post(`${url}/questions/${id}/answers`, JSON.stringify(body), {
       headers: { 'Content-Type': 'application/json' },
     });
     sleep(1);
@@ -99,7 +100,7 @@ const tests = {
   },
   helpfulA: () => {
     const id = 6500000 + Math.floor(Math.random() * 300000);
-    const res = http.put(`http://localhost:3000/answers/${id}/helpful`);
+    const res = http.put(`${url}/answers/${id}/helpful`);
     sleep(1);
 
     check(res, {
@@ -108,7 +109,7 @@ const tests = {
   },
   reportA: () => {
     const id = 6500000 + Math.floor(Math.random() * 300000);
-    const res = http.put(`http://localhost:3000/answers/${id}/report`);
+    const res = http.put(`${url}/answers/${id}/report`);
     sleep(1);
 
     check(res, {
@@ -119,11 +120,11 @@ const tests = {
 
 export default function () {
   tests.allQs();
-  tests.insertQ();
-  tests.helpfulQ();
-  tests.reportQ();
-  tests.allAs();
-  tests.insertA();
-  tests.helpfulA();
-  tests.reportA();
+  // tests.insertQ();
+  // tests.helpfulQ();
+  // tests.reportQ();
+  // tests.allAs();
+  // tests.insertA();
+  // tests.helpfulA();
+  // tests.reportA();
 }
