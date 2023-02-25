@@ -16,8 +16,8 @@ const opts = {
   },
   spike: {
     stages: [
-      { duration: '1m', target: 100 },
-      { duration: '15s', target: 1000 },
+      { duration: '1s', target: 100 },
+      { duration: '1s', target: 1100 },
       { duration: '1m', target: 900 },
       { duration: '15s', target: 100 },
     ],
@@ -25,7 +25,7 @@ const opts = {
 };
 
 export const options = opts.spike;
-const url = 'http://184.169.243.99';
+const url = 'http://localhost:3000';
 
 const tests = {
   allQs: () => {
